@@ -85,8 +85,11 @@ class CategoryController extends Controller
            if(isset($cat->id))
            {
              $success = DB::table('categories')->where('id',$cat->id)->update($final);
+           	$a = DB::table('categories')->orderBy('id','desc')->first();
+
 
        }else{
+
 
            $success = DB::table('categories')->insert($final);
            $a = DB::table('categories')->orderBy('id','desc')->first();
@@ -99,20 +102,24 @@ class CategoryController extends Controller
            if($success==true){
            if(!isset($request['is_parent']))
            {
-
            	  $relation = array(
 
            	  		'parent_id' => $request['sub_category'],
 
-
            	  		'child_id' => $a->id,
+
            	  );
+
            	   $this->category->saveChild($relation);
 
 
            	  
+           }elseif(isset($request['is_parent']) && $act == 'updat')
+           {
+           	  $this->category->shiftChild($cat->id);
            }
-           	   Session::flash('success','Category '.$act.'ed successfully');
+
+           Session::flash('success','Category '.$act.'ed successfully');
 
        }else{
 
@@ -146,5 +153,11 @@ class CategoryController extends Controller
               }
       return redirect()->route('list-category');
 	}
+
+  public function getChildByParent(Request $request)
+  {
+      $this->category = $this->category->getChildByParent($request->cat_id);
+      return response()->json(['status'=>'true','data'=>$this->category]);
+   }
 
 }

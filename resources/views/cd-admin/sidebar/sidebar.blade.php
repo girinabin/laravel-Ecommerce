@@ -62,7 +62,7 @@
           </li>
 
           <li class="nav-item has-treeview ">
-            <a href="{{ route('banner-list') }}" class="nav-link ">
+            <a href="{{ route('list-product') }}" class="nav-link ">
               <i class="nav-icon fas fa-shopping-basket"></i>
               <p>
                 Product
@@ -87,7 +87,7 @@
             <a href="{{ route('banner-list') }}" class="nav-link ">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Order
+                Users
                 
               </p>
             </a>

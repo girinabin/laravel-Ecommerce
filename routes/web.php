@@ -27,6 +27,9 @@ Route::group(['prefix'=>'admin','middleware' => 'auth'],function(){
 	// DASHBOARD
 	Route::get('/','DashboardController@admin')->name('admin-dashboard');
 
+	// AJAX CALL
+	Route::get('/child/{cat_id}','CategoryController@getChildByParent');
+
 	// BANNER STARTS HERE
 
 	Route::group(['prefix'=>'banner'],function(){
@@ -55,6 +58,22 @@ Route::group(['prefix'=>'admin','middleware' => 'auth'],function(){
 		Route::get('/delete/{cat}','CategoryController@deleteCategory')->name('delete-category');
 		Route::post('/status/{cat}','CategoryController@statusCategory')->name('status-category');
 	});
+
+	// CATEGORY ENDS HERE
+
+	// PRODUCT STARTS HERE
+	Route::group(['prefix'=>'product'],function(){
+
+		Route::get('/','ProductController@listProduct')->name('list-product');
+		Route::get('/add','ProductController@addProduct')->name('add-product');
+		Route::get('/edit/{pro}','ProductController@addProduct')->name('edit-product');
+		Route::post('/edit/{pro}','ProductController@postProduct')->name('update-product');
+		Route::post('/post','ProductController@postProduct')->name('post-product');
+		Route::get('/delete/{pro}','ProductController@deleteProduct')->name('delete-product');
+		Route::post('/status/{pro}','ProductController@statusProduct')->name('status-product');
+
+	});
+	// PRODUCT ENDS HERE
 
 	});
 	

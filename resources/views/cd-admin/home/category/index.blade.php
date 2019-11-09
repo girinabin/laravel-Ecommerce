@@ -18,6 +18,8 @@
           <a href="{{ route('add-category') }}">
             <button class="btn btn-app"><i class="fas fa-plus"></i><b><i>Add Category</i></b></button>
           </a>
+
+          <a href="{{ URL()->previous() }}" class="btn btn-default float-right"><i class="fas fa-list"></i>Go Back</a>
           
         </div>
         <!-- /.card-header -->
@@ -89,8 +91,8 @@
               </tr>
               
               
-            </tbody>
             @endforeach
+            </tbody>
             @endif
           </table>
         </div>

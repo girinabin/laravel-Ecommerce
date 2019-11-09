@@ -15,7 +15,7 @@ class Category extends Model
     		'title' => 'required|string',
     		'summary' => 'sometimes|string',
     		'status' => 'string|in:active,inactive',
-    		'show_in_menu' => 'sometimes',
+    		'show_in_menu' => 'required',
     		'seotitle' => 'required|string|max:65',
             'seokeyword' => 'required|string|max:65',
             'seodescription' => 'required|string|max:180'
@@ -70,4 +70,19 @@ class Category extends Model
 
           return $a;
      }
+
+     public function shiftChild($id)
+     {
+         return DB::table('category_relation')->where('child_id',$id)->delete();
+      }
+
+      public function getChildByParent($parent_id)
+      {
+         $child_info = DB::table('category_relation as cr')
+         ->Join('categories as c','c.id', '=' ,'cr.child_id')
+         ->select(['c.title','c.id'])
+         ->where('cr.parent_id',$parent_id)->get();
+
+         return $child_info;
+       }
 }

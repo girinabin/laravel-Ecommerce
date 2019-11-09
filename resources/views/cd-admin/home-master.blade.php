@@ -48,6 +48,13 @@
 
 
 <script src="{{ asset('/js/app.js') }}"></script>
+
+<script>
+  $(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 <script>
       $(document).ready(function() {
@@ -55,19 +62,19 @@
 
         });
 </script>
-<script>
-            $('.preview').on('change',function(){
-                //get the file name
-                var fileName = $(this).val().replace('C:\\fakepath\\', " ");;
-                //replace the "Choose a file" label
-                $(this).next('.custom-file-label').html(fileName);
-            });
+
+<script type="text/javascript">
+
+    $('.custom-file input').change(function (e) {
+        var files = [];
+        for (var i = 0; i < $(this)[0].files.length; i++) {
+            files.push($(this)[0].files[i].name);
+        }
+        $(this).next('.custom-file-label').html(files.join(', '));
+    });
+
 </script>
-<script>
-  $(document).ready( function () {
-    $('#table_id').DataTable();
-} );
-</script>
+
 
 <script src="{{ asset('cd-admin/creatu/js/main.js') }}"></script>
 
